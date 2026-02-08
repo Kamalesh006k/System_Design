@@ -1,10 +1,4 @@
-# 🌍 System Design: The Master Guide
-
-Welcome to the **System Design Master Guide**. 
-
-Instead of one giant file, we have broken down every concept into its own detailed "Lesson Note." Click on a topic below to dive deep.
-
----
+# 🌍 System Design
 
 ## 🏗️ Core Foundations
 *   [**Scalability**](./scalability.md): Vertical vs Horizontal, Bottlenecks.
