@@ -27,8 +27,3 @@
 
 ## 📐 Design
 *   [**HLD, LLD & UML**](./hld_lld_uml.md): Documentation standards and Diagrams.
-
----
-
-## 🚀 Deployment
-*   [**How to Push to GitHub**](./GITHUB_SETUP.md): A step-by-step guide to making this visible online.
