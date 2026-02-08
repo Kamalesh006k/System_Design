@@ -32,7 +32,3 @@
 
 ## 🚀 Deployment
 *   [**How to Push to GitHub**](./GITHUB_SETUP.md): A step-by-step guide to making this visible online.
-
----
-
-*"Simplicity is the ultimate sophistication."*
