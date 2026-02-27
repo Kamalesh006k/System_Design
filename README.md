@@ -1,10 +1,4 @@
-# 🌍 System Design: The Master Guide
-
-Welcome to the **System Design Master Guide**. 
-
-Instead of one giant file, we have broken down every concept into its own detailed "Lesson Note." Click on a topic below to dive deep.
-
----
+# 🌍 System Design
 
 ## 🏗️ Core Foundations
 *   [**Scalability**](./scalability.md): Vertical vs Horizontal, Bottlenecks.
@@ -33,12 +27,3 @@ Instead of one giant file, we have broken down every concept into its own detail
 
 ## 📐 Design
 *   [**HLD, LLD & UML**](./hld_lld_uml.md): Documentation standards and Diagrams.
-
----
-
-## 🚀 Deployment
-*   [**How to Push to GitHub**](./GITHUB_SETUP.md): A step-by-step guide to making this visible online.
-
----
-
-*"Simplicity is the ultimate sophistication."*
