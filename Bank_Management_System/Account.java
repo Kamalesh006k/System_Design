@@ -1,33 +1,102 @@
-import java.sql.Timestamp;
 import java.util.*;
 import java.sql.*;
 
 class Account {
+    private int id;
     private int acc;
     private String name;
-    private int balance;
+    private int pin;
+    private int balance = 0;
     private Timestamp doj;
     private Connection Con;
 
-    Account(int acc, String name, int balance, Timestamp doj,Connection con) throws Exception{
+    public int getAcc() {
+        return acc;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public Timestamp getDoj() {
+        return doj;
+    }
+
+    public void setAcc(int acc) {
+        this.acc = acc;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public void setDoj(Timestamp doj) {
+        this.doj = doj;
+    }
+
+    public void setNull(){
+        this.acc = 0;
+        this.name = null;
+        this.pin = 0;
+        this.balance = 0;
+        this.doj = null;
+    }
+    Account(){
+        setNull();
+    }
+
+    Account(int acc, String name, int pin, Timestamp doj,Connection con) throws Exception{
         this.acc = acc;
         this.name = name;
-        this.balance = balance;
+        this.pin = pin;
         this.doj = doj;
         this.Con = con;
         
-        String query = "insert into user_acc(acc,name,balance,join_date) values(?,?,?,?)";
+        String query = "insert into user_acc(acc,name,pin,balance,join_date) values(?,?,?,?,?)";
         PreparedStatement st = con.prepareStatement(query);
         st.setInt(1,acc);
         st.setString(2, name);
-        st.setInt(3, balance);
-        st.setTimestamp(4, doj);
+        st.setInt(3, pin);
+        st.setInt(4, 0);
+        st.setTimestamp(5, doj);
 
         int result = st.executeUpdate();
         if(result == 1){
             System.out.println("Bank account created");
         }else{
             System.out.println("Bank account not created");
+        }
+
+        String query1 = "select * from user_acc where acc = ? && pin = ?";
+        PreparedStatement st1 = con.prepareStatement(query1);
+        st1.setInt(1, acc);
+        st1.setInt(2, pin);
+
+        ResultSet rs = st1.executeQuery();
+        if(rs.next()){
+            id = rs.getInt(1);
         }
     }
 }

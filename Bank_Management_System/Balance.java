@@ -1,26 +1,30 @@
 import java.sql.*;
 public class Balance {
     private int accno;
-    Connection con;
+    private Connection con;
+    private Account user;
 
-    Balance(int acc, Connection con){
-        this.accno = acc;
+    Balance(Connection con, Account user){
+        this.accno = user.getAcc();
         this.con = con;
+        this. user = user;
     }
 
-    int getBalance() throws Exception{
+    void getBalance() throws Exception{
         try{
             String query = "select balance from user_acc where acc = ?";
             PreparedStatement st = con.prepareStatement(query);
             st.setInt(1, accno);
             ResultSet rs = st.executeQuery();
-            rs.next();
-            return rs.getInt(1);
-        }catch(Exception e){
+            if (rs.next()) {
+                user.setBalance(rs.getInt("balance"));
+            } else {
+                System.out.println("Account not found");
+            }
+        } catch (Exception e) {
             System.out.println(e);
-            return 0;
         }
-        
+
     }
 
 
