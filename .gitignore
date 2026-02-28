@@ -1,6 +1,6 @@
 # Ignore Java compiled files
 *.class
-*.env
+.env
 
 # Ignore build folders
 bin/
