@@ -5,12 +5,14 @@ public class Login {
     int pin;
     Connection con;
 
-    Login(int acc, int pin, Connection con) throws Exception{
+    Login(int acc, int pin, Connection con){
         this.user = new Account();
         this.acc = acc;
         this.pin = pin;
-        this.con = con;
+        this.con = con;        
+    }
 
+    Account login() throws Exception{
         String query = "select * from user_acc where acc = ? && pin = ?";
         PreparedStatement st = con.prepareStatement(query);
         st.setInt(1, acc);
@@ -30,9 +32,6 @@ public class Login {
             System.out.println("User Not Found");
             System.out.println("----------------------");
         }
-    }
-
-    Account login(){
         return user;
     }
 }

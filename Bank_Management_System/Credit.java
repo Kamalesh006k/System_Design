@@ -1,12 +1,6 @@
 import java.math.BigDecimal;
 import java.sql.*;
 public class Credit extends Transaction{
-    private int acc;
-    private BigDecimal Amount;
-    private Connection con;
-    private Account user;
-    private Balance b;
-
     // private void getBalance() throws Exception {
     //     try {
     //         String query = "select balance from user_acc where acc = ?";
@@ -26,13 +20,17 @@ public class Credit extends Transaction{
         
     // }
 
-    Credit(BigDecimal Amount, Connection con, Account user, Balance b, Timestamp ts) throws Exception{
+    Credit(BigDecimal Amount, Connection con, Account user, Balance b, Timestamp ts){
         this.acc = user.getAcc();
         this.Amount = Amount;
         this.con = con;
         this.user = user;
         this.b = b;
+        this.ts = ts;
+    }
 
+    @Override
+    void process() throws Exception {
         con.setAutoCommit(false);
 
         try{

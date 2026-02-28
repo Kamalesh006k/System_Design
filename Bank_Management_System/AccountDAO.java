@@ -6,6 +6,19 @@ public class AccountDAO {
     Account user;
 
     AccountDAO(Account user) throws Exception{
+        this.user = user;
+        // String query1 = "select * from user_acc where acc = ? && pin = ?";
+        // PreparedStatement st1 = user.getCon().prepareStatement(query1);
+        // st1.setInt(1, user.getAcc());
+        // st1.setInt(2, user.getPin());
+
+        // ResultSet rs = st1.executeQuery();
+        // if(rs.next()){
+        //     user.setId(rs.getInt(1));
+        // }
+    }
+
+    void createUser() throws Exception{
         String query = "insert into user_acc(acc,name,pin,balance,join_date) values(?,?,?,?,?)";
         PreparedStatement st = user.getCon().prepareStatement(query);
         st.setInt(1,user.getAcc());
@@ -20,15 +33,5 @@ public class AccountDAO {
         }else{
             System.out.println("Bank account not created");
         }
-
-        // String query1 = "select * from user_acc where acc = ? && pin = ?";
-        // PreparedStatement st1 = user.getCon().prepareStatement(query1);
-        // st1.setInt(1, user.getAcc());
-        // st1.setInt(2, user.getPin());
-
-        // ResultSet rs = st1.executeQuery();
-        // if(rs.next()){
-        //     user.setId(rs.getInt(1));
-        // }
     }
 }

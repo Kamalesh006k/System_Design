@@ -1,10 +1,14 @@
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Timestamp;
 
 abstract class Transaction {
-    private int acc;
-    private BigDecimal Amount;
-    private Connection con;
-    private Account user;
-    private Balance b;
+    int acc;
+    BigDecimal Amount;
+    Connection con;
+    Account user;
+    Balance b;
+    Timestamp ts;
+
+    abstract void process() throws Exception;
 }

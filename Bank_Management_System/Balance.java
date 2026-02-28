@@ -24,8 +24,5 @@ public class Balance {
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
-
-
 }

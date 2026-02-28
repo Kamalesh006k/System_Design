@@ -33,7 +33,7 @@ public class Bank {
                     System.out.print("Create a 4-Digit Pin: ");
                     int pin = sc.nextInt();
                     user = new Account(1000 + secure.nextInt(9000), name, pin, ts, con);
-                    new AccountDAO(user);
+                    new AccountDAO(user).createUser();
                 }
                 case 2 -> {
                     System.out.print("Enter Your 4-Digit acc no: ");
@@ -58,8 +58,7 @@ public class Bank {
                         3.Withdraw
                         4.Transfer amount
                         5.Transaction History
-                        6.Logout
-                        7.Exit""");
+                        6.Logout""");
                     System.out.println("----------------------");
                     System.out.print("Your Choise: ");
                     int option = sc.nextInt();
@@ -76,17 +75,20 @@ public class Bank {
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to credit: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            new Credit(amt, con, user, new Balance(user),ts);
+                            Transaction cd = new Credit(amt, con, user, new Balance(user),ts);
+                            cd.process();
                         }
                         case 3 -> {
                             LocalDateTime lt = LocalDateTime.now();
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to withdraw: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            new Withdraw(amt, con, user, new Balance(user),ts);
+                            Transaction wd = new Withdraw(amt, con, user, new Balance(user),ts);
+                            wd.process();
                         }
                         case 5 ->{
-                            new TransactionHistory(user);
+                            Transaction th = new TransactionHistory(user);
+                            th.process();
                         }
                         case 6 ->{
                             user = null;
