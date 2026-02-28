@@ -9,15 +9,6 @@ public class AccountDAO {
     AccountDAO(Account user, Connection con) throws Exception{
         this.user = user;
         this.con = con;
-        // String query1 = "select * from user_acc where acc = ? && pin = ?";
-        // PreparedStatement st1 = user.getCon().prepareStatement(query1);
-        // st1.setInt(1, user.getAcc());
-        // st1.setInt(2, user.getPin());
-
-        // ResultSet rs = st1.executeQuery();
-        // if(rs.next()){
-        //     user.setId(rs.getInt(1));
-        // }
     }
 
     void createUser() throws Exception{

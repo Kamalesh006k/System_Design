@@ -1,25 +1,6 @@
 import java.math.BigDecimal;
 import java.sql.*;
 public class Credit extends Transaction{
-    // private void getBalance() throws Exception {
-    //     try {
-    //         String query = "select balance from user_acc where acc = ?";
-    //         PreparedStatement st = con.prepareStatement(query);
-    //         st.setInt(1, acc);
-    //         ResultSet rs = st.executeQuery();
-    //         rs.next();
-    //         if (rs.next()) {
-    //             balance = rs.getInt("balance");
-    //         } else {
-    //             throw new Exception("Account not found");
-    //         }
-    //     }catch(Exception e){
-    //         System.out.println(e);
-    //     }
-
-        
-    // }
-
     Credit(BigDecimal Amount, Connection con, Account user, Balance b, Timestamp ts){
         this.Amount = Amount;
         this.con = con;
