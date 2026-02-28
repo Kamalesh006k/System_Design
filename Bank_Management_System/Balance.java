@@ -4,10 +4,10 @@ public class Balance {
     private Connection con;
     private Account user;
 
-    Balance(Connection con, Account user){
+    Balance(Account user){
         this.accno = user.getAcc();
-        this.con = con;
-        this. user = user;
+        this.con = user.getCon();
+        this.user = user;
     }
 
     void getBalance() throws Exception{
@@ -17,7 +17,7 @@ public class Balance {
             st.setInt(1, accno);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                user.setBalance(rs.getInt("balance"));
+                user.setBalance(rs.getBigDecimal("balance"));
             } else {
                 System.out.println("Account not found");
             }

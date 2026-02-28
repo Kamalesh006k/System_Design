@@ -1,4 +1,5 @@
 import java.util.*;
+import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class Bank {
                     System.out.print("Create a 4-Digit Pin: ");
                     int pin = sc.nextInt();
                     user = new Account(1000 + secure.nextInt(9000), name, pin, ts, con);
-                    System.out.println(user.getId());
+                    new AccountDAO(user);
                 }
                 case 2 -> {
                     System.out.print("Enter Your 4-Digit acc no: ");
@@ -66,7 +67,7 @@ public class Bank {
                     sc.nextLine();
                     switch (option) {
                         case 1 -> {
-                            Balance b = new Balance(con, user);
+                            Balance b = new Balance(user);
                             b.getBalance();
                             System.out.println("Your Bank Balance: " + user.getBalance());
                         }
@@ -74,15 +75,18 @@ public class Bank {
                             LocalDateTime lt = LocalDateTime.now();
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to credit: ");
-                            int amt = sc.nextInt();
-                            new Credit(amt, con, user, new Balance(con, user),ts);
+                            BigDecimal amt = sc.nextBigDecimal();
+                            new Credit(amt, con, user, new Balance(user),ts);
                         }
                         case 3 -> {
                             LocalDateTime lt = LocalDateTime.now();
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to withdraw: ");
-                            int amt = sc.nextInt();
-                            new Withdraw(amt, con, user, new Balance(con, user),ts);
+                            BigDecimal amt = sc.nextBigDecimal();
+                            new Withdraw(amt, con, user, new Balance(user),ts);
+                        }
+                        case 5 ->{
+                            new TransactionHistory(user);
                         }
                         case 6 ->{
                             user = null;

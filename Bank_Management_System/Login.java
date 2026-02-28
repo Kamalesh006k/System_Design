@@ -21,9 +21,14 @@ public class Login {
             user.setId(rs.getInt(1));
             user.setAcc(rs.getInt(2));
             user.setName(rs.getString(3));
-            user.setBalance(rs.getInt(5));
+            user.setBalance(rs.getBigDecimal(5));
             user.setDoj(rs.getTimestamp(6));
             user.setPin(rs.getInt(4));
+            user.setCon(con);
+        }else{
+            user = null;
+            System.out.println("User Not Found");
+            System.out.println("----------------------");
         }
     }
 

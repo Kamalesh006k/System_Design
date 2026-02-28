@@ -1,7 +1,8 @@
+import java.math.BigDecimal;
 import java.sql.*;
-public class Credit {
+public class Credit extends Transaction{
     private int acc;
-    private int Amount;
+    private BigDecimal Amount;
     private Connection con;
     private Account user;
     private Balance b;
@@ -21,10 +22,11 @@ public class Credit {
     //     }catch(Exception e){
     //         System.out.println(e);
     //     }
+
         
     // }
 
-    Credit(int Amount, Connection con, Account user, Balance b, Timestamp ts) throws Exception{
+    Credit(BigDecimal Amount, Connection con, Account user, Balance b, Timestamp ts) throws Exception{
         this.acc = user.getAcc();
         this.Amount = Amount;
         this.con = con;
@@ -36,7 +38,7 @@ public class Credit {
         try{
             String query = "update user_acc set balance = balance + ? where acc = ?";
             PreparedStatement st = con.prepareStatement(query);
-            st.setInt(1, Amount);
+            st.setBigDecimal(1, Amount);
             st.setInt(2,user.getAcc());
             int row = st.executeUpdate();
             if(row == 1) System.out.println(Amount+" has been credited to your bank account, Account No: "+user.getAcc());
@@ -45,7 +47,7 @@ public class Credit {
     
             String query1 = "Insert into transaction(type,amt,acc_holder,timestamp) values('credit',?,?,?)";
             PreparedStatement st1 = con.prepareStatement(query1);
-            st1.setInt(1,Amount);
+            st1.setBigDecimal(1,Amount);
             st1.setInt(2, user.getAcc());
             st1.setTimestamp(3,ts);
             st1.executeUpdate();

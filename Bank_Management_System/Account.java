@@ -1,4 +1,5 @@
 import java.util.*;
+import java.math.BigDecimal;
 import java.sql.*;
 
 class Account {
@@ -6,7 +7,7 @@ class Account {
     private int acc;
     private String name;
     private int pin;
-    private int balance = 0;
+    private BigDecimal balance;
     private Timestamp doj;
     private Connection Con;
 
@@ -17,6 +18,10 @@ class Account {
         return id;
     }
 
+    public Connection getCon(){
+        return Con;
+    }
+
     public String getName() {
         return name;
     }
@@ -25,12 +30,16 @@ class Account {
         return pin;
     }
 
-    public int getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
     public Timestamp getDoj() {
         return doj;
+    }
+
+    public void setCon(Connection con){
+        this.Con = con;
     }
 
     public void setAcc(int acc) {
@@ -48,7 +57,7 @@ class Account {
         this.pin = pin;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -60,7 +69,7 @@ class Account {
         this.acc = 0;
         this.name = null;
         this.pin = 0;
-        this.balance = 0;
+        this.balance = BigDecimal.ZERO;
         this.doj = null;
     }
     Account(){
@@ -74,29 +83,29 @@ class Account {
         this.doj = doj;
         this.Con = con;
         
-        String query = "insert into user_acc(acc,name,pin,balance,join_date) values(?,?,?,?,?)";
-        PreparedStatement st = con.prepareStatement(query);
-        st.setInt(1,acc);
-        st.setString(2, name);
-        st.setInt(3, pin);
-        st.setInt(4, 0);
-        st.setTimestamp(5, doj);
+        // String query = "insert into user_acc(acc,name,pin,balance,join_date) values(?,?,?,?,?)";
+        // PreparedStatement st = con.prepareStatement(query);
+        // st.setInt(1,acc);
+        // st.setString(2, name);
+        // st.setInt(3, pin);
+        // st.setInt(4, 0);
+        // st.setTimestamp(5, doj);
 
-        int result = st.executeUpdate();
-        if(result == 1){
-            System.out.println("Bank account created");
-        }else{
-            System.out.println("Bank account not created");
-        }
+        // int result = st.executeUpdate();
+        // if(result == 1){
+        //     System.out.println("Bank account created");
+        // }else{
+        //     System.out.println("Bank account not created");
+        // }
 
-        String query1 = "select * from user_acc where acc = ? && pin = ?";
-        PreparedStatement st1 = con.prepareStatement(query1);
-        st1.setInt(1, acc);
-        st1.setInt(2, pin);
+        // String query1 = "select * from user_acc where acc = ? && pin = ?";
+        // PreparedStatement st1 = con.prepareStatement(query1);
+        // st1.setInt(1, acc);
+        // st1.setInt(2, pin);
 
-        ResultSet rs = st1.executeQuery();
-        if(rs.next()){
-            id = rs.getInt(1);
-        }
+        // ResultSet rs = st1.executeQuery();
+        // if(rs.next()){
+        //     id = rs.getInt(1);
+        // }
     }
 }
