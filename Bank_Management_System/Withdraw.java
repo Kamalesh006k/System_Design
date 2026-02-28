@@ -2,7 +2,6 @@ import java.math.BigDecimal;
 import java.sql.*;
 public class Withdraw extends Transaction {
     Withdraw(BigDecimal Amount, Connection con, Account user, Balance b, Timestamp ts) throws Exception{
-        this.acc = user.getAcc();
         this.Amount = Amount;
         this.con = con;
         this.user = user;

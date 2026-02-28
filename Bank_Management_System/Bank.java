@@ -33,7 +33,7 @@ public class Bank {
                     System.out.print("Create a 4-Digit Pin: ");
                     int pin = sc.nextInt();
                     user = new Account(1000 + secure.nextInt(9000), name, pin, ts, con);
-                    new AccountDAO(user).createUser();
+                    new AccountDAO(user,con).createUser();
                 }
                 case 2 -> {
                     System.out.print("Enter Your 4-Digit acc no: ");
@@ -66,7 +66,7 @@ public class Bank {
                     sc.nextLine();
                     switch (option) {
                         case 1 -> {
-                            Balance b = new Balance(user);
+                            Balance b = new Balance(user,con);
                             b.getBalance();
                             System.out.println("Your Bank Balance: " + user.getBalance());
                         }
@@ -75,7 +75,7 @@ public class Bank {
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to credit: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            Transaction cd = new Credit(amt, con, user, new Balance(user),ts);
+                            Transaction cd = new Credit(amt, con, user, new Balance(user,con),ts);
                             cd.process();
                         }
                         case 3 -> {
@@ -83,11 +83,23 @@ public class Bank {
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to withdraw: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            Transaction wd = new Withdraw(amt, con, user, new Balance(user),ts);
+                            Transaction wd = new Withdraw(amt, con, user, new Balance(user,con),ts);
                             wd.process();
                         }
+                        case 4 ->{
+                            LocalDateTime lt = LocalDateTime.now();
+                            Timestamp ts = Timestamp.valueOf(lt);
+                            Balance b = new Balance(user, con);
+                            System.out.print("Enter the Receiver's Account No: ");
+                            int acc = sc.nextInt();
+                            System.out.print("Enter the Amount to Transfer: ");
+                            BigDecimal amt = sc.nextBigDecimal();
+                            BankTransfer bt = new BankTransfer(user,acc,amt, con, b, ts);
+                            bt.process();
+
+                        }
                         case 5 ->{
-                            Transaction th = new TransactionHistory(user);
+                            Transaction th = new TransactionHistory(user,con);
                             th.process();
                         }
                         case 6 ->{

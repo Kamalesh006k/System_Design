@@ -21,7 +21,6 @@ public class Credit extends Transaction{
     // }
 
     Credit(BigDecimal Amount, Connection con, Account user, Balance b, Timestamp ts){
-        this.acc = user.getAcc();
         this.Amount = Amount;
         this.con = con;
         this.user = user;

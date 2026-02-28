@@ -4,9 +4,9 @@ public class Balance {
     private Connection con;
     private Account user;
 
-    Balance(Account user){
+    Balance(Account user,Connection con){
         this.accno = user.getAcc();
-        this.con = user.getCon();
+        this.con = con;
         this.user = user;
     }
 

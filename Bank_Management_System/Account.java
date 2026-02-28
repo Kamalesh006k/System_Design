@@ -9,17 +9,12 @@ class Account {
     private int pin;
     private BigDecimal balance;
     private Timestamp doj;
-    private Connection Con;
 
     public int getAcc() {
         return acc;
     }
     public int getId() {
         return id;
-    }
-
-    public Connection getCon(){
-        return Con;
     }
 
     public String getName() {
@@ -36,10 +31,6 @@ class Account {
 
     public Timestamp getDoj() {
         return doj;
-    }
-
-    public void setCon(Connection con){
-        this.Con = con;
     }
 
     public void setAcc(int acc) {
@@ -81,7 +72,6 @@ class Account {
         this.name = name;
         this.pin = pin;
         this.doj = doj;
-        this.Con = con;
         
         // String query = "insert into user_acc(acc,name,pin,balance,join_date) values(?,?,?,?,?)";
         // PreparedStatement st = con.prepareStatement(query);

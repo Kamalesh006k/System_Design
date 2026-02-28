@@ -26,7 +26,6 @@ public class Login {
             user.setBalance(rs.getBigDecimal(5));
             user.setDoj(rs.getTimestamp(6));
             user.setPin(rs.getInt(4));
-            user.setCon(con);
         }else{
             user = null;
             System.out.println("User Not Found");

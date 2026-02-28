@@ -1,15 +1,14 @@
 import java.sql.*;
 public class TransactionHistory extends Transaction{
-    private Account user;
-
-    TransactionHistory(Account acc){
+    TransactionHistory(Account acc, Connection con){
         this.user = acc;
+        this.con = con;
     }
 
     @Override
     void process() throws Exception{
         String query = "select * from transaction where acc_holder = ?";
-        PreparedStatement st = user.getCon().prepareStatement(query);
+        PreparedStatement st = con.prepareStatement(query);
         st.setInt(1, user.getAcc());
 
         ResultSet rs = st.executeQuery();
