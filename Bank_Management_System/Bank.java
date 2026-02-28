@@ -76,7 +76,8 @@ public class Bank {
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to credit: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            Transaction cd = new Credit(amt, con, user, new Balance(user, con), ts);
+                            TransactionUpdate tu = new TransactionUpdate(con,"Credit", amt, ts, user.getAcc());
+                            Transaction cd = new Credit(amt, con, user, new Balance(user, con), ts,tu);
                             cd.process();
                         }
                         case 3 -> {
@@ -84,7 +85,8 @@ public class Bank {
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to withdraw: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            Transaction wd = new Withdraw(amt, con, user, new Balance(user, con), ts);
+                            TransactionUpdate tu = new TransactionUpdate(con, "Debit", amt, ts, user.getAcc());
+                            Transaction wd = new Withdraw(amt, con, user, new Balance(user, con), ts,tu);
                             wd.process();
                         }
                         case 4 -> {
@@ -95,7 +97,9 @@ public class Bank {
                             int acc = sc.nextInt();
                             System.out.print("Enter the Amount to Transfer: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            BankTransfer bt = new BankTransfer(user, acc, amt, con, b, ts);
+                            TransactionUpdate tu = new TransactionUpdate(con, "Credit", amt, ts, acc);
+                            TransactionUpdate td = new TransactionUpdate(con, "Debit", amt, ts, user.getAcc());
+                            BankTransfer bt = new BankTransfer(user, acc, amt, con, b, ts,tu,td);
                             bt.process();
 
                         }

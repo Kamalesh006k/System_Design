@@ -9,6 +9,7 @@ abstract class Transaction {
     Account user;
     Balance b;
     Timestamp ts;
+    TransactionUpdate tu;
 
     abstract void process() throws Exception;
 }

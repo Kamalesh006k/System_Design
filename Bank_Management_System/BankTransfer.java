@@ -2,13 +2,17 @@ import java.math.BigDecimal;
 import java.sql.*;
 public class BankTransfer extends Transaction{
     
-    BankTransfer(Account user, int rec, BigDecimal amt, Connection con, Balance b, Timestamp ts){
+    private TransactionUpdate td;
+
+    BankTransfer(Account user, int rec, BigDecimal amt, Connection con, Balance b, Timestamp ts,TransactionUpdate tc, TransactionUpdate td){
         this.user = user;
         this.Amount = amt;
         this.acc = rec;
         this.b = b;
         this.con = con;
         this.ts = ts;
+        this.tu = tc;
+        this.td = td;
     }
 
     @Override
@@ -22,6 +26,7 @@ public class BankTransfer extends Transaction{
             int rs = st1.executeUpdate();
             if(rs == 1){
                 System.out.println(Amount+" has been debited from your bank account, Account No: "+user.getAcc());
+                td.update();
                 b.getBalance();
                 System.out.println("Current Balance: "+user.getBalance());
 
@@ -29,6 +34,7 @@ public class BankTransfer extends Transaction{
                 st2.setBigDecimal(1, Amount);
                 st2.setInt(2, acc);
                 st2.executeUpdate();
+                tu.update();
             }else{
                 System.out.println("An Error Occured!");
             }
