@@ -12,6 +12,7 @@ class Account {
     public int getAcc() {
         return acc;
     }
+
     public int getId() {
         return id;
     }
@@ -35,6 +36,7 @@ class Account {
     public void setAcc(int acc) {
         this.acc = acc;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -55,18 +57,19 @@ class Account {
         this.doj = doj;
     }
 
-    public void setNull(){
+    public void setNull() {
         this.acc = 0;
         this.name = null;
         this.pin = 0;
         this.balance = BigDecimal.ZERO;
         this.doj = null;
     }
-    Account(){
+
+    Account() {
         setNull();
     }
 
-    Account(int acc, String name, int pin, Timestamp doj,Connection con) throws Exception{
+    Account(int acc, String name, int pin, Timestamp doj, Connection con) throws Exception {
         this.acc = acc;
         this.name = name;
         this.pin = pin;
