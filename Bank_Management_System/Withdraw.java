@@ -16,7 +16,7 @@ public class Withdraw extends Transaction {
 
         try{
             if (user.getBalance().compareTo(Amount) < 0) {
-                System.out.println("\nInsufficient Balance\n");
+                System.out.println("Insufficient Balance");
             } else {
                 String query = "update user_acc set balance = balance - ? where acc = ?";
                 PreparedStatement st = con.prepareStatement(query);
