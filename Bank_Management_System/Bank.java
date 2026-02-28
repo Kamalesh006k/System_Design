@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 public class Bank {
     static private Account user;
+
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         Connection con = Database.getconnection();
@@ -33,7 +34,7 @@ public class Bank {
                     System.out.print("Create a 4-Digit Pin: ");
                     int pin = sc.nextInt();
                     user = new Account(1000 + secure.nextInt(9000), name, pin, ts, con);
-                    new AccountDAO(user,con).createUser();
+                    new AccountDAO(user, con).createUser();
                 }
                 case 2 -> {
                     System.out.print("Enter Your 4-Digit acc no: ");
@@ -48,17 +49,17 @@ public class Bank {
                 }
             }
             boolean t = true;
-            if(user != null){
+            if (user != null) {
 
-                while(t){
+                while (t) {
                     System.out.println("----------------------");
                     System.out.println("""
-                        1.Check Balance
-                        2.Credit
-                        3.Withdraw
-                        4.Transfer amount
-                        5.Transaction History
-                        6.Logout""");
+                            1.Check Balance
+                            2.Credit
+                            3.Withdraw
+                            4.Transfer amount
+                            5.Transaction History
+                            6.Logout""");
                     System.out.println("----------------------");
                     System.out.print("Your Choise: ");
                     int option = sc.nextInt();
@@ -66,7 +67,7 @@ public class Bank {
                     sc.nextLine();
                     switch (option) {
                         case 1 -> {
-                            Balance b = new Balance(user,con);
+                            Balance b = new Balance(user, con);
                             b.getBalance();
                             System.out.println("Your Bank Balance: " + user.getBalance());
                         }
@@ -75,7 +76,7 @@ public class Bank {
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to credit: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            Transaction cd = new Credit(amt, con, user, new Balance(user,con),ts);
+                            Transaction cd = new Credit(amt, con, user, new Balance(user, con), ts);
                             cd.process();
                         }
                         case 3 -> {
@@ -83,10 +84,10 @@ public class Bank {
                             Timestamp ts = Timestamp.valueOf(lt);
                             System.out.print("Enter the Amount to withdraw: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            Transaction wd = new Withdraw(amt, con, user, new Balance(user,con),ts);
+                            Transaction wd = new Withdraw(amt, con, user, new Balance(user, con), ts);
                             wd.process();
                         }
-                        case 4 ->{
+                        case 4 -> {
                             LocalDateTime lt = LocalDateTime.now();
                             Timestamp ts = Timestamp.valueOf(lt);
                             Balance b = new Balance(user, con);
@@ -94,22 +95,24 @@ public class Bank {
                             int acc = sc.nextInt();
                             System.out.print("Enter the Amount to Transfer: ");
                             BigDecimal amt = sc.nextBigDecimal();
-                            BankTransfer bt = new BankTransfer(user,acc,amt, con, b, ts);
+                            BankTransfer bt = new BankTransfer(user, acc, amt, con, b, ts);
                             bt.process();
 
                         }
-                        case 5 ->{
-                            Transaction th = new TransactionHistory(user,con);
+                        case 5 -> {
+                            Transaction th = new TransactionHistory(user, con);
                             th.process();
                         }
-                        case 6 ->{
+                        case 6 -> {
                             user = null;
                             t = false;
                         }
                     }
                 }
             }
-    
+
         }
-        }
+        sc.close();
+    }
+
 }

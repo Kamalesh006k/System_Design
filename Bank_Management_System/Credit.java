@@ -11,6 +11,9 @@ public class Credit extends Transaction{
 
     @Override
     void process() throws Exception {
+        if (Amount == null || Amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new Exception("Amount must be greater than 0");
+        }
         con.setAutoCommit(false);
 
         try{
