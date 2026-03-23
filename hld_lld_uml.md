@@ -7,7 +7,7 @@ Documentation is the bridge between your brain and the code.
 ## 1. HLD (High-Level Design)
 *   **Goal:** To explain the system architecture to stakeholders (Managers, Architects).
 *   **Focus:** Flow of data, Infrastructure, Scalability.
-*   **Common Components:** Cloud Load Balancers, Databases, Caching Layers, CDN, External APIs.
+*   **Common Components:** Cloud Load Balancers,Databases, Caching Layers, CDN, External APIs.
 *   **Deliverable:** System Architecture Diagram (Boxes and Arrows).
 
 ## 2. LLD (Low-Level Design)
